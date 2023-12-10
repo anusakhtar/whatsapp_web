@@ -1,14 +1,11 @@
-import 'dart:js';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:whatsapp_webapp/res/WebPages/login_signup_page.dart';
-import 'package:whatsapp_webapp/res/WebPages/messages_page.dart';
-
-import '../WebPages/home_page.dart';
+import 'package:whatsapp_webapp/View/WebPages/home_page.dart';
+import 'package:whatsapp_webapp/View/WebPages/login_signup_page.dart';
+import 'package:whatsapp_webapp/View/WebPages/messages_page.dart';
 
 class RoutesForWebPages {
-  static Route<dynamic> createroutes(RouteSettings settingsRoute) {
+  static Route<dynamic> createRoutes(RouteSettings settingsRoute) {
     final arguments = settingsRoute.arguments;
     switch (settingsRoute.name) {
       case '/':
