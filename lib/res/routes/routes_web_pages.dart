@@ -4,6 +4,8 @@ import 'package:whatsapp_webapp/View/WebPages/home_page.dart';
 import 'package:whatsapp_webapp/View/WebPages/login_signup_page.dart';
 import 'package:whatsapp_webapp/View/WebPages/messages_page.dart';
 
+import '../../Model/user_model.dart';
+
 class RoutesForWebPages {
   static Route<dynamic> createRoutes(RouteSettings settingsRoute) {
     final arguments = settingsRoute.arguments;
@@ -15,7 +17,7 @@ class RoutesForWebPages {
       case '/home':
         return MaterialPageRoute(builder: (context) => const HomePage());
       case '/messages':
-        return MaterialPageRoute(builder: (context) => const MessagesPage());
+        return MaterialPageRoute(builder: (context) => MessagesPage(arguments as UserModel));
     }
     return errorPageRoute();
   }

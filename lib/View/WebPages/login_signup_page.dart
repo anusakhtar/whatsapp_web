@@ -54,7 +54,12 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
             setState(() {
               onLoading = false ;
             });
-            Navigator.pushReplacementNamed(context, "/home");
+            Navigator.pushReplacementNamed(context, '/home');
+            var snackBar = const SnackBar(
+              content: Text("Register Successfully"),
+              backgroundColor: AppColor.primaryColor,
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
         });
       });
     } else {
@@ -68,20 +73,28 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
 
   // 1: create a new user
   signUpUserNow(nameInput, emailInput, passwordInput) async {
-    final userCreated = await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(
-            email: emailInput, password: passwordInput);
+    final userCreated = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailInput, password: passwordInput);
     // upload image to storage
     String? uidOfUserCreated = userCreated.user!.uid;
     if (uidOfUserCreated != null) {
-      final userData = UserModel(
-        uid: uidOfUserCreated,
-        name: nameInput,
-        email: emailInput,
-        password: passwordInput,
-      );
+      final userData = UserModel(uidOfUserCreated,nameInput,emailInput,passwordInput);
       uploadImageToStorage(userData);
+
     }
+  }
+  loginUserNow(emailInput, passwordInput) {
+
+    FirebaseAuth.instance.signInWithEmailAndPassword(email: emailInput, password: passwordInput).then((value){
+    });
+    setState(() {
+      onLoading = false;
+    });
+    Navigator.pushReplacementNamed(context, '/home');
+    var snackBar = const SnackBar(
+      content: Text("Login Successfully"),
+      backgroundColor: AppColor.primaryColor,
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   //2: check form validation
@@ -114,17 +127,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
           }
         } else //Login form
         {
-          FirebaseAuth.instance.signInWithEmailAndPassword(email: emailInput, password: passwordInput).then((value){
-            setState(() {
-              onLoading = false;
-            });
-          });
-          Navigator.pushReplacementNamed(context, '/home');
-          var snackBar = const SnackBar(
-            content: Text("Login Successfully"),
-            backgroundColor: AppColor.primaryColor,
-          );
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+         loginUserNow(emailInput,passwordInput);
         }
       } else {
         var snackBar = const SnackBar(

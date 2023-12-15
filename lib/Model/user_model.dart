@@ -8,12 +8,12 @@ class UserModel {
   String image;
 
   UserModel(
-      {required this.uid,
-      required this.name,
-      required this.email,
-      required this.password,
-      this.image = "",
-      });
+      this.uid,
+       this.name,
+       this.email,
+        this.password,
+      {this.image = "",}
+      );
 
   Map<String, dynamic> tojson() {
     return {
