@@ -23,12 +23,6 @@ Future<void> main() async{
       ),
     );
 
-    // User? currentFirebaseUser = FirebaseAuth.instance.currentUser;
-    // if(currentFirebaseUser != null){
-    //   firstRoute = '/home';
-    // }
-    // FirebaseAuth auth = FirebaseAuth.instance;
-    // print('Current user: $currentFirebaseUser');
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user != null) {
         firstRoute = '/home';
